@@ -7,4 +7,9 @@ const FacultySchema = new mongoose.Schema({
 
 const Faculty = mongoose.model("Faculty", FacultySchema);
 
+
+
+
+
+
 module.exports = Faculty;

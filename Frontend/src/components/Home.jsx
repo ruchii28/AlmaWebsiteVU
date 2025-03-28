@@ -6,22 +6,29 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  // Slider settings for automatic sliding without clicking
   const sliderSettings = {
     dots: false,
     infinite: true,
-    speed: 2000,  // Transition speed
-    slidesToShow: 3, // Number of images visible at a time
+    speed: 2000,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,  // Enables automatic sliding
-    autoplaySpeed: 2500, // Changes slide every 2.5 seconds
-    arrows: false, // Removes next/prev buttons
-    pauseOnHover: false, // Keeps sliding even when hovered
+    autoplay: true,
+    autoplaySpeed: 2500,
+    arrows: false,
+    pauseOnHover: false,
   };
 
+  const alumniImages = [
+    { src: "/images/download.jpeg", name: "Alumni 1", title: "Software Engineer" },
+    { src: "/images/download.jpeg", name: "Alumni 2", title: "Data Scientist" },
+    { src: "/images/download.jpeg", name: "Alumni 3", title: "Entrepreneur" },
+    { src: "/images/download.jpeg", name: "Alumni 4", title: "AI Researcher" },
+    { src: "/images/download.jpeg", name: "Alumni 5", title: "Tech Innovator" },
+    { src: "/images/download.jpeg", name: "Alumni 6", title: "Business Leader" },
+  ];
+
   return (
-    <div className="pt-16 text-center px-4 py-8"> {/* Prevents overlap */}
-      {/* Hero Section */}
+    <div className="pt-16 text-center px-4 py-8">
       <motion.div
         className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-12 rounded-xl shadow-lg"
         initial={{ opacity: 0, y: -50 }}
@@ -39,21 +46,20 @@ const Home = () => {
         </motion.button>
       </motion.div>
 
-      {/* Notable Alumni (Auto-Sliding Section) */}
       <div className="mt-12">
         <h2 className="text-3xl font-semibold mb-6">Our Notable Alumni</h2>
-        <div className="max-w-5xl mx-auto"> {/* Centered Slider */}
+        <div className="max-w-5xl mx-auto">
           <Slider {...sliderSettings}>
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
+            {alumniImages.map((alumni, index) => (
               <div key={index} className="p-4">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <img
-                    src={`https://via.placeholder.com/150`}
-                    alt={`Alumni ${index + 1}`}
+                    src={alumni.src}
+                    alt={alumni.name}
                     className="mx-auto mb-3 rounded-full w-32 h-32 object-cover"
                   />
-                  <h3 className="text-xl font-bold">Alumni {index + 1}</h3>
-                  <p className="text-gray-600">Industry Leader | Tech Innovator</p>
+                  <h3 className="text-xl font-bold">{alumni.name}</h3>
+                  <p className="text-gray-600">{alumni.title}</p>
                 </div>
               </div>
             ))}
@@ -61,20 +67,18 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
-      <div className="mt-12">
-        <h2 className="text-3xl font-semibold mb-6">What Our Alumni Say</h2>
-        <Slider {...sliderSettings} slidesToShow={1}>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-            <p className="italic">"Vignan provided me with the foundation to achieve my dreams!"</p>
-            <h4 className="mt-2 font-semibold">- Alumni Name</h4>
+      <footer className="mt-12 bg-gray-900 text-white py-6">
+        <div className="container mx-auto text-center">
+          <h3 className="text-lg font-semibold">Vignan's Foundation for Science, Technology & Research</h3>
+          <p>(Deemed to be University), Vadlamudi, Guntur-522213</p>
+          <p>Email: <a href="mailto:info@vignan.ac.in" className="text-orange-400">info@vignan.ac.in</a></p>
+          <p>Contact: 0863-2344700 / 701</p>
+          <div className="mt-4 text-sm">
+            <p>Stay connected with your alma mater! Join our alumni community to network, mentor, and grow.</p>
+            <p>&copy; {new Date().getFullYear()} Vignan Alumni Network. All Rights Reserved.</p>
           </div>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-            <p className="italic">"Great networking and career growth opportunities!"</p>
-            <h4 className="mt-2 font-semibold">- Another Alumni</h4>
-          </div>
-        </Slider>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 };

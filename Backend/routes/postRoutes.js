@@ -76,30 +76,10 @@
 
 
 const express = require('express');
-const { Post } = require('../models/post');
+const { Post } = require('../models/Post');
 const router = express.Router();
 
-/** ✅ 1. Alumni Creates a Post */
-// router.post('/create', async (req, res) => {
-//     console.log("Request received at /api/posts/create"); // Debugging log
-//     console.log("Request Body:", req.body); // Check if request body is coming
 
-//     try {
-//         const { title, description, image, createdBy } = req.body;
-//         if (!title || !description || !createdBy) {
-//             return res.status(400).json({ error: "Missing required fields" });
-//         }
-
-//         const newPost = new Post({ title, description, image, createdBy });
-//         await newPost.save();
-//         res.status(201).json({ message: "Post submitted for approval", post: newPost });
-//     } catch (error) {
-//         console.error("Error:", error.stack);
-//         res.status(500).json({ error: "Error creating post" });
-//     }
-// });
-
-/** ✅ 2. Get All Pending Posts (For Faculty Approval) */
 router.get('/pending', async (req, res) => {
     try {
         const posts = await Post.find({ status: 'Pending' }).populate('createdBy', 'name regNo email'); 

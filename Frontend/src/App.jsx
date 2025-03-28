@@ -8,12 +8,15 @@ import Login from "./components/Login";
 import AlumniLogin from "./components/AlumniLogin";
 import AlumniSignup from "./components/Alumnisignup";
 import AlumniDetails from "./components/Alumnidetails";
-import FacultyLogin from "./components/facultylogin";
+import FacultyLogin from "./components/Facultylogin";
 import FacultyDashboard from "./components/FacultyDashboard";  // Fixed path
 import ViewAlumni from "./components/ViewAlumni";
 import Post from "./components/Post";  // Ensure this component exists
 import CreatePost from "./components/createpost";
 import FacultyApproval from "./components/FacultyApproval";
+import Filter from "./components/filter";
+import AlumniFilter from "./components/AlumniFilter";
+
 import "./App.css";
 
 function App() {
@@ -36,6 +39,9 @@ function App() {
         <Route path="/alumni" element={<Alumni />} />
         <Route path="/createpost" element={<CreatePost />} />
         <Route path="/faculty-approval" element={<FacultyApproval />} />
+        <Route path="/filter" element={<Filter />} />
+        <Route path="/alumni-filter" element={<AlumniFilter />} />
+
 
 
       </Routes>

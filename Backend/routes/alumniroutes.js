@@ -84,6 +84,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 const { Alumni } = require("../models/alumni");
 
 const router = express.Router();
@@ -158,6 +159,46 @@ router.get("/view-alumni", async (req, res) => {
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 });
+
+
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER, // ✅ Securely stored in .env
+        pass: process.env.EMAIL_PASS, // ✅ Securely stored in .env
+    },
+});
+
+// 📌 Email Sending Route
+router.post("/send-email", async (req, res) => {
+    try {
+        const { email, subject, message } = req.body;
+
+        // Validate input
+        if (!email || !subject || !message) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER, // ✅ Matches the sender email
+            to: email,
+            subject: subject,
+            text: message,
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
+        res.json({ success: "Email sent successfully" });
+    } catch (error) {
+        console.error("Email sending error:", error); // 🛠️ Debugging log
+        res.status(500).json({ error: "Failed to send email", details: error.message });
+    }
+});
+
+
+
+
 
 module.exports = router;
 
