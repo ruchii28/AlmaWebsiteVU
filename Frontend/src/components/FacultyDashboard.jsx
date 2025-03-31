@@ -9,7 +9,7 @@ const FacultyDashboard = () => {
         { title: "Post Dashboard", path: "/faculty-approval" },
         
         { title: "Filter-Data", path: "/alumni-filter" },
-        { title: "Send-Event Mail", path: "/email" }
+        { title: "Send-Event Mail", path: "/email-alumni-filter" }
         
     ];
 
