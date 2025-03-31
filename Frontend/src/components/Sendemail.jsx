@@ -14,7 +14,6 @@ const AlumniFilter = () => {
 
   const [results, setResults] = useState([]);
   const [selectedCandidates, setSelectedCandidates] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -33,8 +32,6 @@ const AlumniFilter = () => {
 
       const response = await axios.get(`http://localhost:5000/api/faculty/filter?${queryParams}`);
       setResults(response.data);
-      setSelectedCandidates([]);
-      setSelectAll(false);
     } catch (error) {
       console.error("Error fetching data", error);
     }
@@ -47,16 +44,6 @@ const AlumniFilter = () => {
     } else {
       setSelectedCandidates(selectedCandidates.filter(item => item._id !== alumni._id));
     }
-  };
-
-  // Handle select all checkbox
-  const handleSelectAll = (e) => {
-    if (e.target.checked) {
-      setSelectedCandidates(results);
-    } else {
-      setSelectedCandidates([]);
-    }
-    setSelectAll(e.target.checked);
   };
 
   // Send email to selected candidates
@@ -73,7 +60,7 @@ const AlumniFilter = () => {
       }));
 
       // Assuming you have an email-sending route in your backend
-      await axios.post("http://localhost:5000/api/send-email", { candidates: emailData });
+      await axios.post("http://localhost:5000/api/faculty/send-email", { candidates: emailData });
 
       alert("Emails sent successfully!");
     } catch (error) {
@@ -120,13 +107,7 @@ const AlumniFilter = () => {
           <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead className="bg-blue-500 text-white">
               <tr>
-                <th className="py-3 px-6 text-left">
-                  <input 
-                    type="checkbox" 
-                    checked={selectAll} 
-                    onChange={handleSelectAll} 
-                  />
-                </th>
+                <th className="py-3 px-6 text-left">Select</th>
                 <th className="py-3 px-6 text-left">Registration No.</th>
                 <th className="py-3 px-6 text-left">Full Name</th>
                 <th className="py-3 px-6 text-left">Batch</th>
@@ -141,7 +122,6 @@ const AlumniFilter = () => {
                   <td className="py-2 px-6">
                     <input 
                       type="checkbox" 
-                      checked={selectedCandidates.some(item => item._id === alumni._id)}
                       onChange={(e) => handleCheckboxChange(e, alumni)} 
                     />
                   </td>
@@ -157,6 +137,14 @@ const AlumniFilter = () => {
           </table>
         </div>
       )}
+
+      {/* Send Email Button */}
+      <button 
+        onClick={handleSendEmail} 
+        className="mt-6 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300 w-full"
+      >
+        Send Email to Selected Alumni
+      </button>
     </div>
   );
 };

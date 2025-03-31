@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Gallery from "./components/Gallery";
 import Alumni from "./components/Alumni";
-import Contact from "./components/Contact";
+
 import Login from "./components/Login";
 import AlumniLogin from "./components/AlumniLogin";
 import AlumniSignup from "./components/Alumnisignup";
@@ -16,6 +16,8 @@ import CreatePost from "./components/createpost";
 import FacultyApproval from "./components/FacultyApproval";
 import Filter from "./components/filter";
 import AlumniFilter from "./components/AlumniFilter";
+import FilterResults from "./components/FilterResults";
+import Sendemail from "./components/Sendemail";
 
 import "./App.css";
 
@@ -28,7 +30,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/post" element={<Post />} />  {/* Fixed component name */}
-        <Route path="/contact" element={<Contact />} />
+       
         <Route path="/login" element={<Login />} />
         <Route path="/AlumniLogin" element={<AlumniLogin />} />
         <Route path="/Alumnisignup" element={<AlumniSignup />} />
@@ -41,6 +43,10 @@ function App() {
         <Route path="/faculty-approval" element={<FacultyApproval />} />
         <Route path="/filter" element={<Filter />} />
         <Route path="/alumni-filter" element={<AlumniFilter />} />
+        <Route path="/filter-results" element={<FilterResults />} />
+        <Route path="/send-email" element={<Sendemail/>} />
+        
+
 
 
 
